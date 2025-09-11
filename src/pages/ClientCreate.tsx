@@ -5,19 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 export default function ClientCreate() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const [formData, ] = useState({
     name: "",
     email: "",
     age: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData({
+  //     ...formData,
+  //     [name]: value,
+  //   });
+  // };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

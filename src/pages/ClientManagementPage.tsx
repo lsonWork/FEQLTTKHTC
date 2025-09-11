@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TextInput,
@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../store/user-store";
 
 export default function ClientManagementPage() {
   const [search, setSearch] = useState("");
@@ -88,6 +89,9 @@ export default function ClientManagementPage() {
     activePage * pageSize
   );
 
+  const user = userStore((s) => s.user);
+  console.log(user);
+
   return (
     <div className="w-screen min-h-screen bg-gray-100 p-6">
       <div className="max-w-7xl mx-auto bg-white rounded-lg shadow p-6 flex flex-col h-full">
@@ -114,8 +118,7 @@ export default function ClientManagementPage() {
             striped
             highlightOnHover
             withTableBorder
-            className="min-w-full"
-          >
+            className="min-w-full">
             <Table.Thead className="bg-gray-50">
               <Table.Tr>
                 <Table.Th>ID</Table.Th>
