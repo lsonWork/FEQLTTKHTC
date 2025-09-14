@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 // Interceptor request (nếu cần gắn token)
 axiosInstance.interceptors.request.use((config) => {
   const token = Cookies.get("access_token");
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -25,7 +26,10 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // xử lý lỗi chung, ví dụ 401
     if (error.response?.status === 401) {
-      console.log("Unauthorized");
+      location.href = "/signin";
+    }
+    if (error.response?.status === 403) {
+      location.href = "/";
     }
     return Promise.reject(error);
   }

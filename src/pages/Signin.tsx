@@ -1,9 +1,10 @@
-import { TextInput, Button, Title, Paper } from "@mantine/core";
+import { TextInput, Button, Title, Paper, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { usePostLoginApi } from "../api/usePostSigninApi";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../store/user-store";
+import { showNotification } from "@mantine/notifications";
 
 export default function SignIn() {
   const form = useForm({
@@ -33,13 +34,30 @@ export default function SignIn() {
   const { mutateAsync } = usePostLoginApi();
   const navigate = useNavigate();
   const setUser = userStore((s) => s.setUser);
+  const user = userStore((s) => s.user);
 
   const handleSubmit = async (values: any) => {
-    const data = await mutateAsync(values);
-    Cookies.set("access_token", data.data.access_token);
-    console.log(data.data.access_token);
-    setUser(data.data.user);
-    navigate("/");
+    try {
+      const data = await mutateAsync(values);
+      Cookies.set("access_token", data.data.access_token);
+      setUser(data.data.user);
+      showNotification({
+        title: "Thành công",
+        message: "Đăng nhập thành công",
+        color: "green",
+      });
+      if (data.data.user.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      showNotification({
+        title: "Thất bại",
+        message: "Đăng nhập thất bại",
+        color: "red",
+      });
+    }
   };
 
   return (
@@ -70,14 +88,18 @@ export default function SignIn() {
             className="w-[80%]"
             classNames={{
               input:
-                "w-full rounded-md border-2 border-gray-300 py-2 px-6 focus:border-blue-500 focus:ring-1 focus:ring-blue-300",
+                "w-full rounded-md border-2 border-gray-300 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-300",
               label: "mb-4 font-medium text-gray-700",
               error: "text-red-500 text-sm mt-1",
             }}
+            onKeyDown={(e) => {
+              if (e.key === " ") {
+                e.preventDefault();
+              }
+            }}
           />
 
-          <TextInput
-            type="password"
+          <PasswordInput
             size="md"
             label="Mật khẩu"
             onKeyDown={(e) => {

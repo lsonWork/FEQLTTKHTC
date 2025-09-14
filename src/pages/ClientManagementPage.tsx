@@ -90,7 +90,6 @@ export default function ClientManagementPage() {
   );
 
   const user = userStore((s) => s.user);
-  console.log(user);
 
   return (
     <div className="w-screen min-h-screen bg-gray-100 p-6">
