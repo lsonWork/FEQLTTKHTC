@@ -1,85 +1,97 @@
-import { useRef } from "react";
-// @ts-ignore
-import html2pdf from "html2pdf.js";
+import React from "react";
 
-export default function TestPdf() {
-  const printRef = useRef<HTMLDivElement | null>(null);
+const generateFakeData = (rows) => {
+  return Array.from({ length: rows }).map((_, i) => ({
+    name: `Nguyễn Văn ${i + 1}`,
+    age: 20 + (i % 10),
+    job: ["Kỹ sư", "Nhân viên", "Quản lý", "Designer"][i % 4],
+  }));
+};
 
-  const handleExport = async () => {
-    if (!printRef.current) return;
+const tableCount = 5; // Số bảng
+const rowsPerTable = 17; // Số dòng mỗi bảng
 
-    const allElements = printRef.current.querySelectorAll("*");
-    console.log(allElements);
-    allElements.forEach((el, index) => {
-      const computedStyle = window.getComputedStyle(el);
-      const bg = computedStyle.backgroundColor;
-      const color = computedStyle.color;
-      const borderColor = computedStyle.borderColor;
-
-      if (
-        bg.includes("oklch") ||
-        color.includes("oklch") ||
-        borderColor.includes("oklch")
-      ) {
-        console.log(`Element ${index}:`, el.tagName, {
-          backgroundColor: bg,
-          color: color,
-          borderColor: borderColor,
-        });
-      }
-    });
-
-    // nếu dùng webfont, đợi load xong
-    if ((document as any).fonts && (document as any).fonts.ready) {
-      await (document as any).fonts.ready;
-    }
-
-    const element = printRef.current;
-    const opt = {
-      margin: [10, 10, 10, 10], // mm
-      filename: "report.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, logging: false },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    };
-
-    html2pdf().set(opt).from(element).save();
-  };
-
+const App = () => {
   return (
-    <div style={{ padding: 16 }}>
-      <div ref={printRef} style={{ background: "white", padding: 16 }}>
-        {/* Ví dụ nội dung */}
-        <h1 style={{ fontFamily: "Times New Roman", fontSize: "18pt" }}>
-          Tiêu đề
-        </h1>
-        <p style={{ fontFamily: "Times New Roman", fontSize: "12pt" }}>
-          Nội dung báo cáo...
-        </p>
+    <div style={{ padding: 20, fontFamily: "Times New Roman" }}>
+      <h1>Demo Nhiều Bảng Kẻ Rõ</h1>
 
-        <table style={{ width: "100%", borderCollapse: "collapse" }} border={1}>
-          <thead>
-            <tr>
-              <th>Mã</th>
-              <th>Tên</th>
-              <th>Ghi chú</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from({ length: 20 }).map((_, i) => (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>Ng Tèo {i + 1}</td>
-                <td>Ghi chú {i + 1}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      {Array.from({ length: tableCount }).map((_, tableIdx) => {
+        const data = generateFakeData(rowsPerTable);
+        return (
+          <div
+            key={tableIdx}
+            style={{
+              marginBottom: 40,
+              border: "1px solid #000",
+              padding: 10,
+            }}>
+            <h2>Bảng {tableIdx + 1}</h2>
+            <table
+              style={{
+                borderCollapse: "collapse",
+                width: "100%",
+              }}>
+              <thead>
+                <tr style={{ backgroundColor: "#eee" }}>
+                  <th style={{ border: "1px solid #000", padding: 5 }}>STT</th>
+                  <th style={{ border: "1px solid #000", padding: 5 }}>Tên</th>
+                  <th style={{ border: "1px solid #000", padding: 5 }}>Tuổi</th>
+                  <th style={{ border: "1px solid #000", padding: 5 }}>
+                    Nghề nghiệp
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((row, idx) => (
+                  <tr key={idx}>
+                    <td style={{ border: "1px solid #000", padding: 5 }}>
+                      {idx + 1}
+                    </td>
+                    <td style={{ border: "1px solid #000", padding: 5 }}>
+                      {row.name}
+                    </td>
+                    <td style={{ border: "1px solid #000", padding: 5 }}>
+                      {row.age}
+                    </td>
+                    <td style={{ border: "1px solid #000", padding: 5 }}>
+                      {row.job}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <p>
+              Đây là đoạn văn mô tả bảng {tableIdx + 1}. Nội dung tiếng Việt đầy
+              đủ: ă, â, ê, ô, ơ, ư.
+            </p>
+          </div>
+        );
+      })}
 
-      <button onClick={handleExport} style={{ marginTop: 12 }}>
-        Xuất PDF (html2pdf)
+      <button
+        onClick={() => window.print()}
+        style={{
+          padding: "10px 20px",
+          backgroundColor: "#4caf50",
+          color: "#fff",
+          border: "none",
+          borderRadius: 4,
+          cursor: "pointer",
+        }}>
+        In / Save as PDF
       </button>
+
+      <style>
+        {`
+          @media print {
+            button { display: none; }
+            div { page-break-inside: avoid; }
+          }
+        `}
+      </style>
     </div>
   );
-}
+};
+
+export default App;
