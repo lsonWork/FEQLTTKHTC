@@ -26,6 +26,10 @@ export default function ClientCreate() {
       bClientCentreAddress: "",
       bClientOfficeAddress: "",
       bNumberDKKD: "",
+      bNumberDKKDDate: "",
+      bNumberDKKDPlace: "",
+      bClientIndustry: "",
+      bClientLabor: "",
     },
 
     // Validate
@@ -47,7 +51,8 @@ export default function ClientCreate() {
     <div className="container mx-auto">
       <div
         onClick={() => navigate("/")}
-        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4">
+        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4"
+      >
         <IconArrowLeft />
         <span>Về trang quản lý</span>
       </div>
@@ -58,7 +63,8 @@ export default function ClientCreate() {
             <div
               ref={printRef}
               id="print-area"
-              style={{ fontFamily: "Times New Roman, Times, serif" }}>
+              style={{ fontFamily: "Times New Roman, Times, serif" }}
+            >
               <div className="flex items-center gap-2">
                 <span className="text-[12pt]">Mã khách hàng:</span>
                 <TextInput {...form.getInputProps("aCode")} />
@@ -77,14 +83,16 @@ export default function ClientCreate() {
                       borderCollapse: "collapse",
                       tableLayout: "fixed",
                       width: "100%",
-                    }}>
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <td
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Đơn vị quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -107,7 +115,8 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phòng KH quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -229,7 +238,8 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phân loại KH khả năng thu nợ
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -463,7 +473,7 @@ export default function ClientCreate() {
                           Tên khách hàng (Tiếng Việt-Tiếng Anh-Viết tắt)
                         </div>
                         <div className="col-span-4 border-r border-black px-1">
-                          <input
+                          <textarea
                             {...form.getInputProps("bClientName")}
                             style={{
                               border: "none",
@@ -473,6 +483,14 @@ export default function ClientCreate() {
                               fontSize: "12pt",
                               height: "auto",
                               outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
                             }}
                           />
                         </div>
@@ -480,7 +498,7 @@ export default function ClientCreate() {
                           CIF
                         </div>
                         <div className="col-span-1 border-black px-1">
-                          <input
+                          <textarea
                             {...form.getInputProps("bCIF")}
                             style={{
                               border: "none",
@@ -490,6 +508,14 @@ export default function ClientCreate() {
                               fontSize: "12pt",
                               height: "auto",
                               outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
                             }}
                           />
                         </div>
@@ -499,7 +525,7 @@ export default function ClientCreate() {
                           Địa chỉ trụ sở
                         </div>
                         <div className="col-span-6 border-black px-1">
-                          <input
+                          <textarea
                             {...form.getInputProps("bClientCentreAddress")}
                             style={{
                               border: "none",
@@ -509,6 +535,14 @@ export default function ClientCreate() {
                               fontSize: "12pt",
                               height: "auto",
                               outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
                             }}
                           />
                         </div>
@@ -518,7 +552,7 @@ export default function ClientCreate() {
                           Địa chỉ văn phòng
                         </div>
                         <div className="col-span-6 border-black px-1">
-                          <input
+                          <textarea
                             {...form.getInputProps("bClientOfficeAddress")}
                             style={{
                               border: "none",
@@ -528,40 +562,171 @@ export default function ClientCreate() {
                               fontSize: "12pt",
                               height: "auto",
                               outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-8 border-black">
+                        <div className="col-span-2 border-r border-black px-1">
+                          Đăng ký kinh doanh
+                        </div>
+                        <div className="border-b col-span-6 grid grid-cols-8 border-black px-1">
+                          <div className="col-span-2 border-r border-black px-1 text-center">
+                            Số ĐKKD
+                          </div>
+                          <div className="col-span-4 border-r border-black px-1 text-center">
+                            Ngày đăng ký KD (lần đầu, ngày đăng ký gần nhất)
+                          </div>
+                          <div className="col-span-2 border-black px-1 text-center">
+                            Nơi cấp
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-8 border-b border-black">
+                        <div className="col-span-2 border-r border-black px-1"></div>
+                        <div className="col-span-6 grid grid-cols-8 border-black px-1">
+                          <div className="col-span-2 border-r border-black px-1 text-center">
+                            <textarea
+                              {...form.getInputProps("bNumberDKKD")}
+                              style={{
+                                border: "none",
+                                width: "100%",
+                                padding: 0,
+                                margin: 0,
+                                fontSize: "12pt",
+                                height: "auto",
+                                outline: "none",
+                                resize: "none",
+                                overflow: "hidden",
+                              }}
+                              rows={1}
+                              onInput={(e) => {
+                                e.currentTarget.style.height = "auto";
+                                e.currentTarget.style.height =
+                                  e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
+                              }}
+                            />
+                          </div>
+                          <div className="col-span-4 border-r border-black px-1 text-center">
+                            <textarea
+                              {...form.getInputProps("bNumberDKKDDate")}
+                              style={{
+                                border: "none",
+                                width: "100%",
+                                padding: 0,
+                                margin: 0,
+                                fontSize: "12pt",
+                                height: "auto",
+                                outline: "none",
+                                resize: "none",
+                                overflow: "hidden",
+                              }}
+                              onInput={(e) => {
+                                e.currentTarget.style.height = "auto";
+                                e.currentTarget.style.height =
+                                  e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
+                              }}
+                              rows={1}
+                            />
+                          </div>
+                          <div className="col-span-2 border-black px-1 text-center">
+                            <textarea
+                              {...form.getInputProps("bNumberDKKDPlace")}
+                              style={{
+                                border: "none",
+                                width: "100%",
+                                padding: 0,
+                                margin: 0,
+                                fontSize: "12pt",
+                                height: "auto",
+                                outline: "none",
+                                resize: "none",
+                                overflow: "hidden",
+                              }}
+                              onInput={(e) => {
+                                e.currentTarget.style.height = "auto";
+                                e.currentTarget.style.height =
+                                  e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
+                              }}
+                              rows={1}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-8 border-b border-black">
+                        <div className="col-span-2 border-r border-black px-1">
+                          Ngành kinh doanh
+                        </div>
+                        <div className="col-span-6 border-black px-1">
+                          <textarea
+                            {...form.getInputProps("bClientIndustry")}
+                            style={{
+                              border: "none",
+                              width: "100%",
+                              padding: 0,
+                              margin: 0,
+                              fontSize: "12pt",
+                              height: "auto",
+                              outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
                             }}
                           />
                         </div>
                       </div>
                       <div className="grid grid-cols-8 border-b border-black">
                         <div className="col-span-2 border-r border-black px-1">
-                          Đăng ký kinh doanh
+                          Số lượng lao động
                         </div>
-                        <div className="col-span-6 grid grid-cols-8 border-black px-1">
-                          <div className="col-span-2 border-r border-black px-1 text-center">
-                            Số ĐKKD
-                          </div>
-                          <div className="col-span-4 border-r border-black px-1 text-center">
-                            Ngày đăng ký KD (lần đầu, ngày đăng ký gần nhất)
-                          </div>
-                          <div className="col-span-2 border-black px-1 text-center">
-                            Nơi cấp
-                          </div>
+                        <div className="col-span-6 border-black px-1">
+                          <textarea
+                            {...form.getInputProps("bClientLabor")}
+                            style={{
+                              border: "none",
+                              width: "100%",
+                              padding: 0,
+                              margin: 0,
+                              fontSize: "12pt",
+                              height: "auto",
+                              outline: "none",
+                              resize: "none",
+                              overflow: "hidden",
+                            }}
+                            rows={1}
+                            onInput={(e) => {
+                              e.currentTarget.style.height = "auto";
+                              e.currentTarget.style.height =
+                                e.currentTarget.scrollHeight + "px"; // auto expand theo nội dung
+                            }}
+                          />
                         </div>
                       </div>
                       <div className="grid grid-cols-8 border-b border-black">
                         <div className="col-span-2 border-r border-black px-1">
-                          
+                          Người đại diện theo pháp luật
                         </div>
-                        <div className="col-span-6 grid grid-cols-8 border-black px-1">
-                          <div className="col-span-2 border-r border-black px-1 text-center">
-                            Số ĐKKD
+                        <div className="col-span-6 grid grid-cols-7 border-black px-1">
+                          <div className="col-span-3 border-r border-black">
+                            Lê Thị Hải
                           </div>
-                          <div className="col-span-4 border-r border-black px-1 text-center">
-                            Ngày đăng ký KD (lần đầu, ngày đăng ký gần nhất)
+                          <div className="col-span-1 border-r border-black">
+                            Chức vụ:
                           </div>
-                          <div className="col-span-2 border-black px-1 text-center">
-                            Nơi cấp
-                          </div>
+                          <div className="col-span-3 ">Giám đốc</div>
                         </div>
                       </div>
                       <div></div>
