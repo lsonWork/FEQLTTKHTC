@@ -116,6 +116,21 @@ button:focus-visible {
     width: 100%;
     box-shadow: none !important;
   }
+
+  textarea {
+    height: auto !important;
+    min-height: fit-content !important;
+    max-height: none !important;
+    overflow: visible !important;
+    resize: none !important;
+    
+    /* Đảm bảo text wrap đúng */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    
+    /* Tránh bị cắt giữa các trang */
+    page-break-inside: avoid;
+  }
 }
 
 table td {
