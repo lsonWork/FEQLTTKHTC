@@ -9,6 +9,12 @@ import ThreeYearTable from "./components/ThreeYearTable";
 import BranchCreditInfo from "./components/BranchCreditInfo";
 import OtherTCTD from "./components/OtherTCTD";
 import RelatedClientBranch from "./components/RelatedClientBranch";
+import { EnsureSolution } from "./components/EnsureSolution";
+import { Condition } from "./components/Condition";
+import { Approve } from "./components/Approve";
+import { UpComing } from "./components/UpComing";
+import { CurrentPrice } from "./components/CurrentPrice";
+import { ComplexSituation } from "./components/ComplexSituation";
 
 export default function ClientCreate() {
   const navigate = useNavigate();
@@ -95,6 +101,55 @@ export default function ClientCreate() {
         col6: string;
         col7: string;
         col8: string;
+      }[],
+      cEnsureSolution: [] as {
+        col1: string;
+        col2: string;
+        col3: string;
+        col4: string;
+        col5: string;
+        col6: string;
+      }[],
+      cCondition: [
+        { col2: "", col3: "" },
+        { col2: "", col3: "" },
+      ],
+      cLeaderApprove: [
+        { col2: "", col3: "" },
+        { col2: "", col3: "" },
+      ],
+      cDirectorApprove: [
+        { col2: "", col3: "" },
+        { col2: "", col3: "" },
+      ],
+      dUpComing: [] as {
+        col1: string;
+        col2: string;
+        col3: string;
+        col4: string;
+        col5: string;
+      }[],
+      dCurrentPrice: [] as {
+        col1: string;
+        col2: string;
+        col3: string;
+        col4: string;
+        col5: string;
+      }[],
+      dComplexFirst: "",
+      dComplexSecond: "",
+      dComplexThird: "",
+      dComplexSituation: [] as {
+        col1: string;
+        col2: string;
+        col3: string;
+        col4: string;
+        col5: string;
+        col6: string;
+        col7: string;
+        col8: string;
+        col9: string;
+        col10: string;
       }[],
     },
 
@@ -705,6 +760,13 @@ export default function ClientCreate() {
                   <h2 className="text-[13pt] font-bold my-4">
                     5. Biện pháp bảo đảm
                   </h2>
+                  <div>
+                    <p className="text-red-500 no-print">
+                      * Double click chuột trái vào header để thêm dòng, nhấn
+                      chuột phải vào dòng để xoá
+                    </p>
+                    <EnsureSolution form={form} />
+                  </div>
                 </div>
                 <div>
                   <span className="text-[13pt] font-bold mr-1">
@@ -714,6 +776,9 @@ export default function ClientCreate() {
                     (Các điều kiện trọng yếu, đặc thù, cần lưu ý và các điều
                     kiện vi phạm nếu có)
                   </span>
+                  <div>
+                    <Condition form={form} />
+                  </div>
                 </div>
               </div>
               <div>
@@ -724,11 +789,25 @@ export default function ClientCreate() {
                   <h2 className="text-[13pt] font-bold my-4">
                     1. Tình hình giao dịch, kế hoạch kinh doanh với khách hàng
                   </h2>
+                  <div>
+                    <p className="text-red-500 no-print">
+                      * Double click chuột trái vào header để thêm dòng, nhấn
+                      chuột phải vào dòng để xoá
+                    </p>
+                    <ComplexSituation form={form} />
+                  </div>
                 </div>
                 <div>
                   <h2 className="text-[13pt] font-bold my-4">
                     2. Chính sách giá đang áp dụng
                   </h2>
+                  <div>
+                    <p className="text-red-500 no-print">
+                      * Double click chuột trái vào header để thêm dòng, nhấn
+                      chuột phải vào dòng để xoá
+                    </p>
+                    <CurrentPrice form={form} />
+                  </div>
                 </div>
                 <div>
                   <h2 className="text-[13pt] font-bold my-4">
@@ -740,17 +819,30 @@ export default function ClientCreate() {
                     3. Công việc triển khai trong thời gian tới
                   </span>
                   <span>(các cơ hội, dự án tiềm năng…)</span>
+                  <p className="text-red-500 no-print">
+                    * Double click chuột trái vào header để thêm dòng, nhấn
+                    chuột phải vào dòng để xoá
+                  </p>
+                  <div>
+                    <UpComing form={form} />
+                  </div>
                 </div>
               </div>
               <div>
                 <h2 className="text-[13pt] font-bold my-4">
                   E. PHÊ DUYỆT CỦA LÃNH ĐẠO PHÒNG KHDN
                 </h2>
+                <div>
+                  <Approve form={form} name="cLeaderApprove" />
+                </div>
               </div>
               <div>
                 <h2 className="text-[13pt] font-bold my-4">
                   F. PHÊ DUYỆT CỦA GIÁM ĐỐC/PHÓ GIÁM ĐỐC PHỤ TRÁCH
                 </h2>
+                <div>
+                  <Approve form={form} name="cDirectorApprove" />
+                </div>
               </div>
             </div>
           </form>
