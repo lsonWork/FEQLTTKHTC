@@ -1,7 +1,7 @@
-import { Button, Tabs, TextInput } from "@mantine/core";
+import { Button, Modal, Tabs, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconArrowLeft } from "@tabler/icons-react";
-import { useEffect, useRef } from "react";
+import { IconArrowLeft, IconFile } from "@tabler/icons-react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomInput } from "./components/CustomInput";
 import CapitalStructure from "./components/CapitalStructure";
@@ -15,8 +15,14 @@ import { Approve } from "./components/Approve";
 import { UpComing } from "./components/UpComing";
 import { CurrentPrice } from "./components/CurrentPrice";
 import { ComplexSituation } from "./components/ComplexSituation";
+import { usePostDocumentApi } from "../api/usePostDocumentApi";
+import { useDisclosure } from "@mantine/hooks";
+import { userStore } from "../store/user-store";
 
 export default function ClientCreate() {
+  const [cif, setCif] = useState("");
+  const [name, setName] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const form = useForm({
     // Giá trị mặc định
@@ -163,11 +169,36 @@ export default function ClientCreate() {
   });
 
   const printRef = useRef<HTMLDivElement>(null);
+  const [opened, { open, close }] = useDisclosure();
+  const { mutateAsync: postDocument } = usePostDocumentApi();
 
-  const handleSubmit = (values: any) => {
-    console.log("Record created:", values);
+  const handleSubmit = () => {
+    open();
+  };
 
-    window.print();
+  const handleSave = () => {
+    if (name.trim().length === 0) {
+      setError("Tên tài liệu không được để trống");
+      return;
+    }
+
+    // console.log("Record created:", values);
+    // setCif(values.bCIF);
+    // const jsonValue = JSON.stringify(values);
+    // console.log(jsonValue);
+    // console.log(JSON.parse(jsonValue));
+    // postDocument
+
+    const newDocument = {
+      name,
+      content: form.values,
+      cif: form.values.bCIF,
+    };
+
+    console.log(userStore.getState().user);
+    
+
+    console.log(newDocument);
   };
 
   return (
@@ -181,14 +212,13 @@ export default function ClientCreate() {
       <div className="w-full">
         <div className="w-full h-auto bg-white/90 shadow-[0_0_20px_rgba(0,0,0,0.2)] p-8">
           <form onSubmit={form.onSubmit(handleSubmit)}>
-            <button type="submit">Submit</button>
             <div
               ref={printRef}
               id="print-area"
               style={{ fontFamily: "Times New Roman, Times, serif" }}>
-              <div className="flex items-center gap-2">
-                <span className="text-[12pt]">Mã khách hàng:</span>
-                <TextInput {...form.getInputProps("aCode")} />
+              <div className="flex items-end gap-2">
+                <div className="text-[12pt] shrink-0">Mã khách hàng:</div>
+                <CustomInput form={form} name="aCode" />
               </div>
               <h2 className="text-[13pt] font-bold text-center my-8">
                 PHIẾU QUẢN LÝ THÔNG TIN KHÁCH HÀNG TỔ CHỨC
@@ -595,7 +625,7 @@ export default function ClientCreate() {
                         <div className="col-span-2 border-r border-black px-1">
                           Ghi chú/Lưu ý (sinh nhật, sở thích/thói quen, khác…)
                         </div>
-                        <div className="col-span-6">
+                        <div className="col-span-6 px-1">
                           <CustomInput form={form} name="bNote" />
                         </div>
                       </div>
@@ -768,14 +798,16 @@ export default function ClientCreate() {
                     <EnsureSolution form={form} />
                   </div>
                 </div>
-                <div>
-                  <span className="text-[13pt] font-bold mr-1">
-                    6. Tình hình thực hiện các điều kiện tín dụng, thương mại
-                  </span>
-                  <span className="text-[13pt]">
-                    (Các điều kiện trọng yếu, đặc thù, cần lưu ý và các điều
-                    kiện vi phạm nếu có)
-                  </span>
+                <div className="">
+                  <div className="my-4">
+                    <span className="text-[13pt] font-bold mr-1">
+                      6. Tình hình thực hiện các điều kiện tín dụng, thương mại
+                    </span>
+                    <span className="text-[13pt]">
+                      (Các điều kiện trọng yếu, đặc thù, cần lưu ý và các điều
+                      kiện vi phạm nếu có)
+                    </span>
+                  </div>
                   <div>
                     <Condition form={form} />
                   </div>
@@ -845,9 +877,41 @@ export default function ClientCreate() {
                 </div>
               </div>
             </div>
+            <button
+              className="mt-8 no-print bg-green-700 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
+              type="submit">
+              <div className="flex items-center gap-1">
+                <span>Lưu thông tin</span>
+                <IconFile />
+              </div>
+            </button>
           </form>
         </div>
       </div>
+      <Modal
+        opened={opened}
+        onClose={() => {
+          setName("");
+          setError(null);
+          close();
+        }}
+        withCloseButton={true}
+        centered
+        title="Thông tin tài liệu">
+        <TextInput
+          minLength={1}
+          label="Tên tài liệu"
+          onChange={(e) => setName(e.currentTarget.value)}
+          error={error}
+        />
+        <Button
+          onClick={handleSave}
+          className="mt-2 no-print bg-green-700 hover:bg-green-600 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-200 transition-all">
+          <div className="flex items-center gap-1">
+            <span>Lưu</span>
+          </div>
+        </Button>
+      </Modal>
     </div>
   );
 }

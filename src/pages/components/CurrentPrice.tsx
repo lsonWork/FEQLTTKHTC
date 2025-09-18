@@ -39,7 +39,7 @@ export const CurrentPrice = ({ form }: { form: any }) => {
             removeRow(index);
           }}
           className="grid grid-cols-7 border-black border-t">
-          <div className="col-span-1 border-r border-black px-1">
+          <div className="col-span-1 border-r border-black text-center px-1">
             <CustomInput form={form} name={`dCurrentPrice.${index}.col1`} />
           </div>
           <div className="col-span-1 border-r border-black px-1">

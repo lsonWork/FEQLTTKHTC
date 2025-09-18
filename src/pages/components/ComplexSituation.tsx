@@ -76,34 +76,34 @@ export const ComplexSituation = ({ form }: { form: any }) => {
             removeRow(index);
           }}
           className="grid grid-cols-12 border-black border-t">
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r text-center border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col1`} />
           </div>
-          <div className="col-span-3 border-r border-black">
+          <div className="col-span-3 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col2`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col3`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col4`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col5`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col6`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col7`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col8`} />
           </div>
-          <div className="col-span-1 border-r border-black">
+          <div className="col-span-1 border-r border-black px-1">
             <CustomInput form={form} name={`dComplexSituation.${index}.col9`} />
           </div>
-          <div className="col-span-1 border-black">
+          <div className="col-span-1 border-black px-1">
             <CustomInput
               form={form}
               name={`dComplexSituation.${index}.col10`}

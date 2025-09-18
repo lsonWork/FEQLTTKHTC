@@ -17,7 +17,7 @@ export const UpComing = ({ form }: { form: any }) => {
   };
   return (
     <div className="border border-black">
-      <div onDoubleClick={addRow} className="grid grid-cols-7 text-center">
+      <div onDoubleClick={addRow} className="grid grid-cols-7 text-center bg-stone-300">
         <div className="col-span-1 font-bold border-r border-black">STT</div>
         <div className="col-span-1 font-bold border-r border-black px-1">
           Sản phẩm
