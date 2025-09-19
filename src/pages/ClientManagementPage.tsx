@@ -9,7 +9,7 @@ import {
   Modal,
   Tooltip,
 } from "@mantine/core";
-import { IconEdit, IconEye, IconTrash } from "@tabler/icons-react";
+import { IconEye, IconTrash } from "@tabler/icons-react";
 import { useNavigate } from "react-router-dom";
 import { useGetDocumentApi } from "../api/useGetDocumentApi";
 import dayjs from "dayjs";
@@ -91,7 +91,8 @@ export default function ClientManagementPage() {
                         <ActionIcon
                           onClick={() => navigate(`/document/${item.id}`)}
                           color="green"
-                          variant="light">
+                          variant="light"
+                        >
                           <IconEye size={18} />
                         </ActionIcon>
                       </Tooltip>
@@ -102,7 +103,8 @@ export default function ClientManagementPage() {
                             open();
                           }}
                           color="red"
-                          variant="light">
+                          variant="light"
+                        >
                           <IconTrash size={18} />
                         </ActionIcon>
                       </Tooltip>

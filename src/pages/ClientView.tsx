@@ -176,7 +176,6 @@ export default function ClientView() {
     }
     if (isSuccess) {
       form.setValues(JSON.parse(dataDocument?.content || "{}"));
-      console.log(dataDocument);
       setName(dataDocument?.name || "");
     }
   }, [isSuccess, isLoading]);
