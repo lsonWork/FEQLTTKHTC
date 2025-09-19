@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../lib/axios";
 
 export type PatchDocumentDTO = {
@@ -9,6 +9,7 @@ export type PatchDocumentDTO = {
 };
 
 export const usePatchDocumentApi = (id: number) => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: PatchDocumentDTO): Promise<any> => {
       const result = await axiosInstance.patch(
@@ -16,6 +17,11 @@ export const usePatchDocumentApi = (id: number) => {
         data
       );
       return result.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["document"],
+      });
     },
   });
 };

@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       location.href = "/signin";
     }
-    if (error.response?.status === 403) {
+    if (error.response?.data.data === "Forbidden resource") {
       const user = localStorage.getItem("user");
       if (user) {
         const userData = JSON.parse(user);
@@ -56,6 +56,14 @@ axiosInstance.interceptors.response.use(
           });
         }
       });
+    }
+    if (
+      error.response?.data.statusCode === 403 &&
+      error.response?.data.message === "Account is not active"
+    ) {
+      localStorage.removeItem("user");
+      Cookies.remove("access_token");
+      location.href = "/signin";
     }
     return Promise.reject(error);
   }
