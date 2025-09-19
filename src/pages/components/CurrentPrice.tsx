@@ -40,19 +40,39 @@ export const CurrentPrice = ({ form }: { form: any }) => {
           }}
           className="grid grid-cols-7 border-black border-t">
           <div className="col-span-1 border-r border-black text-center px-1">
-            <CustomInput form={form} name={`dCurrentPrice.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`dCurrentPrice.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dCurrentPrice.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`dCurrentPrice.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`dCurrentPrice.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`dCurrentPrice.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dCurrentPrice.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`dCurrentPrice.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
           <div className="col-span-2 border-black px-1">
-            <CustomInput form={form} name={`dCurrentPrice.${index}.col5`} />
+            <CustomInput
+              form={form}
+              name={`dCurrentPrice.${index}.col5`}
+              displayText={row.col5}
+            />
           </div>
         </div>
       ))}

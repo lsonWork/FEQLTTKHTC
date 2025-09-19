@@ -1,19 +1,17 @@
-import { Loader, Modal, Overlay, Text } from "@mantine/core";
+import { Loader, Overlay } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { IconLogout } from "@tabler/icons-react";
 import { Outlet, useLocation } from "react-router-dom";
 import { loaderStore } from "./store/loader-store";
 import Cookies from "js-cookie";
-import { userStore } from "./store/user-store";
 import { useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const pathname = useLocation().pathname;
   const { isLoading } = loaderStore();
-  const setUser = userStore((s) => s.setUser);
   const logout = () => {
     Cookies.remove("access_token");
-    setUser(null);
+    localStorage.removeItem("user");
     navigate("/signin");
   };
 

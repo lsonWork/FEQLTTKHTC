@@ -17,7 +17,9 @@ export const UpComing = ({ form }: { form: any }) => {
   };
   return (
     <div className="border border-black">
-      <div onDoubleClick={addRow} className="grid grid-cols-7 text-center bg-stone-300">
+      <div
+        onDoubleClick={addRow}
+        className="grid grid-cols-7 text-center bg-stone-300">
         <div className="col-span-1 font-bold border-r border-black">STT</div>
         <div className="col-span-1 font-bold border-r border-black px-1">
           Sản phẩm
@@ -43,19 +45,39 @@ export const UpComing = ({ form }: { form: any }) => {
           }}
           className="grid grid-cols-7 border-black border-t">
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dUpComing.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`dUpComing.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dUpComing.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`dUpComing.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`dUpComing.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`dUpComing.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dUpComing.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`dUpComing.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
           <div className="col-span-2 border-black px-1">
-            <CustomInput form={form} name={`dUpComing.${index}.col5`} />
+            <CustomInput
+              form={form}
+              name={`dUpComing.${index}.col5`}
+              displayText={row.col5}
+            />
           </div>
         </div>
       ))}

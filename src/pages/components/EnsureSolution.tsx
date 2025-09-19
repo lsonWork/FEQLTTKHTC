@@ -46,22 +46,46 @@ export const EnsureSolution = ({ form }: { form: any }) => {
           }}
           className="grid grid-cols-12 border-black border-t">
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-3 border-r border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col5`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col5`}
+              displayText={row.col5}
+            />
           </div>
           <div className="col-span-2 border-black px-1">
-            <CustomInput form={form} name={`cEnsureSolution.${index}.col6`} />
+            <CustomInput
+              form={form}
+              name={`cEnsureSolution.${index}.col6`}
+              displayText={row.col6}
+            />
           </div>
         </div>
       ))}

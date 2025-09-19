@@ -1,8 +1,8 @@
 import { Button, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconArrowLeft, IconFile } from "@tabler/icons-react";
-import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { CustomInput } from "./components/CustomInput";
 import CapitalStructure from "./components/CapitalStructure";
 import ThreeYearTable from "./components/ThreeYearTable";
@@ -22,11 +22,23 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import { loaderStore } from "../store/loader-store";
 import { showNotification } from "@mantine/notifications";
+import { useGetDocumentByIdApi } from "../api/useGetDocumentByIdApi";
+import {
+  usePatchDocumentApi,
+  type PatchDocumentDTO,
+} from "../api/usePatchDocumentApi";
 
-export default function ClientCreate() {
+export default function ClientView() {
+  const { id } = useParams();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const {
+    data: documentRawData,
+    isSuccess,
+    isLoading,
+  } = useGetDocumentByIdApi(Number(id));
+  const dataDocument = documentRawData?.data;
   const form = useForm({
     // Giá trị mặc định
     initialValues: {
@@ -78,11 +90,6 @@ export default function ClientCreate() {
         col3: string;
         col4: string;
       }[],
-      // cTinhHinhTinDungTaiChiNhanhFirst: "",
-      // cTinhHinhTinDungTaiChiNhanhSecond: "",
-      // cTinhHinhTinDungTaiChiNhanhThird: "",
-      // cTinhHinhTinDungTaiChiNhanhFourth: "",
-      // cTinhHinhTinDungTaiChiNhanhFifth: "",
       cTinhHinhTinDungTaiChiNhanh: [] as {
         col1: string;
         col2: string;
@@ -161,19 +168,26 @@ export default function ClientCreate() {
         col10: string;
       }[],
     },
-
-    // Validate
-    // validate: {
-    //   username: (value) =>
-    //     value.trim().length < 3 ? "Username phải ít nhất 3 ký tự" : null,
-    //   email: (value) => (/^\S+@\S+$/.test(value) ? null : "Email không hợp lệ"),
-    //   age: (value) => (value < 18 ? "Phải >= 18 tuổi" : null),
-    // },
   });
+
+  const { setIsLoading } = loaderStore();
+
+  useEffect(() => {
+    if (isLoading) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+    if (isSuccess) {
+      form.setValues(JSON.parse(dataDocument?.content || "{}"));
+      console.log(dataDocument);
+      setName(dataDocument?.name || "");
+    }
+  }, [isSuccess, isLoading]);
 
   const printRef = useRef<HTMLDivElement>(null);
   const [opened, { open, close }] = useDisclosure();
-  const { mutateAsync: postDocument } = usePostDocumentApi();
+  const { mutateAsync: patchDocument } = usePatchDocumentApi(Number(id));
 
   const handleSubmit = () => {
     open();
@@ -185,8 +199,6 @@ export default function ClientCreate() {
       setError("Tên tài liệu không được để trống");
       return;
     }
-
-    // postDocument
     const newDocument = {
       name,
       content: JSON.stringify(form.values),
@@ -196,13 +208,13 @@ export default function ClientCreate() {
 
     try {
       loaderStore.setState({ isLoading: true });
-      await postDocument(newDocument as CreateDocumentDTO);
+      await patchDocument(newDocument as PatchDocumentDTO);
       showNotification({
         title: "Thành công",
-        message: "Tạo tài liệu mới thành công",
+        message: "Cập nhật tài liệu thành công",
         color: "green",
       });
-      navigate("/");
+    //   close();
     } catch (error) {
       return error;
     } finally {
@@ -902,7 +914,6 @@ export default function ClientCreate() {
       <Modal
         opened={opened}
         onClose={() => {
-          setName("");
           setError(null);
           close();
         }}
@@ -914,6 +925,7 @@ export default function ClientCreate() {
           label="Tên tài liệu"
           onChange={(e) => setName(e.currentTarget.value)}
           error={error}
+          value={name}
         />
         <Button
           onClick={handleSave}

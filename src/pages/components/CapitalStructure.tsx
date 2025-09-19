@@ -1,7 +1,8 @@
-import React from "react";
 import { CustomInput } from "./CustomInput";
 
 export default function CapitalStructure({ form }: { form: any }) {
+  const rows = form.values.bCoCauVon || [];
+
   const addRow = () => {
     form.insertListItem("bCoCauVon", {
       id: Date.now().toString(),
@@ -38,7 +39,7 @@ export default function CapitalStructure({ form }: { form: any }) {
       </div>
 
       {/* Rows */}
-      {form.values.bCoCauVon.map((row: any, index: number) => (
+      {rows.map((row: any, index: number) => (
         <div
           key={row.id}
           className="grid grid-cols-5 border-t border-black"
@@ -47,16 +48,32 @@ export default function CapitalStructure({ form }: { form: any }) {
             removeRow(index);
           }}>
           <div className="col-span-2 border-r border-black px-1">
-            <CustomInput form={form} name={`bCoCauVon.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`bCoCauVon.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1 text-center">
-            <CustomInput form={form} name={`bCoCauVon.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`bCoCauVon.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1 text-center">
-            <CustomInput form={form} name={`bCoCauVon.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`bCoCauVon.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-1 border-black px-1 text-center">
-            <CustomInput form={form} name={`bCoCauVon.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`bCoCauVon.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
         </div>
       ))}

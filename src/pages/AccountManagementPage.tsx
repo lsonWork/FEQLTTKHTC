@@ -152,7 +152,10 @@ export default function AccountManagementPage() {
             <TextInput
               placeholder="Tìm kiếm theo tên đăng nhập"
               value={search}
-              onChange={(e) => setSearch(e.currentTarget.value)}
+              onChange={(e) => {
+                setSearch(e.currentTarget.value);
+                setActivePage(1);
+              }}
               className="w-2/3"
             />
             <Button color="blue" onClick={() => navigate("/admin/create")}>
@@ -221,7 +224,9 @@ export default function AccountManagementPage() {
                 {accountData?.data.data.length === 0 && (
                   <Table.Tr>
                     <Table.Td colSpan={8}>
-                      <Text className="text-gray-500">Không có dữ liệu</Text>
+                      <Text className="text-gray-500 text-center">
+                        Không có dữ liệu
+                      </Text>
                     </Table.Td>
                   </Table.Tr>
                 )}

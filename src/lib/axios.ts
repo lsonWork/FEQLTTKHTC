@@ -1,3 +1,4 @@
+import { showNotification } from "@mantine/notifications";
 import axios from "axios";
 import Cookies from "js-cookie";
 
@@ -29,7 +30,32 @@ axiosInstance.interceptors.response.use(
       location.href = "/signin";
     }
     if (error.response?.status === 403) {
-      location.href = "/";
+      const user = localStorage.getItem("user");
+      if (user) {
+        const userData = JSON.parse(user);
+        if (userData.role === "admin") {
+          location.href = "/admin";
+        } else {
+          location.href = "/";
+        }
+      }
+    }
+    if (error.response?.status === 400 && error.response?.data?.data) {
+      error.response.data.data.map((el: string) => {
+        if (el === "cif should not be empty") {
+          showNotification({
+            title: "Lỗi",
+            message: "Mã khách hàng (CIF) không được để trống",
+            color: "red",
+          });
+        } else {
+          showNotification({
+            title: "Lỗi",
+            message: el,
+            color: "red",
+          });
+        }
+      });
     }
     return Promise.reject(error);
   }

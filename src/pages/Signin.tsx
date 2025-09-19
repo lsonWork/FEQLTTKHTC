@@ -3,7 +3,6 @@ import { useForm } from "@mantine/form";
 import { usePostLoginApi } from "../api/usePostSigninApi";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { userStore } from "../store/user-store";
 import { showNotification } from "@mantine/notifications";
 
 export default function SignIn() {
@@ -33,14 +32,12 @@ export default function SignIn() {
   });
   const { mutateAsync } = usePostLoginApi();
   const navigate = useNavigate();
-  const setUser = userStore((s) => s.setUser);
-  const user = userStore((s) => s.user);
 
   const handleSubmit = async (values: any) => {
     try {
       const data = await mutateAsync(values);
       Cookies.set("access_token", data.data.access_token);
-      setUser(data.data.user);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
       showNotification({
         title: "Thành công",
         message: "Đăng nhập thành công",

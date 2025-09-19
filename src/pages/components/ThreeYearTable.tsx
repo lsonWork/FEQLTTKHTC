@@ -42,16 +42,32 @@ const ThreeYearTable = ({ form }: { form: any }) => {
           }}
           className="grid grid-cols-6 border-black border-t">
           <div className="col-span-3 border-r border-black px-1">
-            <CustomInput form={form} name={`bTinhHinhTaiChinh.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`bTinhHinhTaiChinh.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-1 text-center border-r border-black px-1">
-            <CustomInput form={form} name={`bTinhHinhTaiChinh.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`bTinhHinhTaiChinh.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-1 text-center border-r border-black px-1">
-            <CustomInput form={form} name={`bTinhHinhTaiChinh.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`bTinhHinhTaiChinh.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-1 text-center border-black px-1">
-            <CustomInput form={form} name={`bTinhHinhTaiChinh.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`bTinhHinhTaiChinh.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
         </div>
       ))}

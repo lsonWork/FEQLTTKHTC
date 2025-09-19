@@ -52,30 +52,35 @@ export default function BranchCreditInfo({ form }: { form: any }) {
               <CustomInput
                 form={form}
                 name={`cTinhHinhTinDungTaiChiNhanh.${index}.col1`}
+                displayText={row.col1}
               />
             </div>
             <div className="col-span-4 border-r border-black px-1">
               <CustomInput
                 form={form}
                 name={`cTinhHinhTinDungTaiChiNhanh.${index}.col2`}
+                displayText={row.col2}
               />
             </div>
             <div className="col-span-2 border-r border-black px-1 text-end">
               <CustomInput
                 form={form}
                 name={`cTinhHinhTinDungTaiChiNhanh.${index}.col3`}
+                displayText={row.col3}
               />
             </div>
             <div className="col-span-2 border-r border-black px-1 text-end">
               <CustomInput
                 form={form}
                 name={`cTinhHinhTinDungTaiChiNhanh.${index}.col4`}
+                displayText={row.col4}
               />
             </div>
             <div className="col-span-3 border-black px-1 text-end">
               <CustomInput
                 form={form}
                 name={`cTinhHinhTinDungTaiChiNhanh.${index}.col5`}
+                displayText={row.col5}
               />
             </div>
           </div>

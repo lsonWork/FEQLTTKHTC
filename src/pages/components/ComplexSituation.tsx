@@ -77,36 +77,73 @@ export const ComplexSituation = ({ form }: { form: any }) => {
           }}
           className="grid grid-cols-12 border-black border-t">
           <div className="col-span-1 border-r text-center border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col1`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col1`}
+              displayText={row.col1}
+            />
           </div>
           <div className="col-span-3 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col2`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col2`}
+              displayText={row.col2}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col3`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col3`}
+              displayText={row.col3}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col4`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col4`}
+              displayText={row.col4}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col5`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col5`}
+              displayText={row.col5}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col6`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col6`}
+              displayText={row.col6}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col7`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col7`}
+              displayText={row.col7}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col8`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col8`}
+              displayText={row.col8}
+            />
           </div>
           <div className="col-span-1 border-r border-black px-1">
-            <CustomInput form={form} name={`dComplexSituation.${index}.col9`} />
+            <CustomInput
+              form={form}
+              name={`dComplexSituation.${index}.col9`}
+              displayText={row.col9}
+            />
           </div>
           <div className="col-span-1 border-black px-1">
             <CustomInput
               form={form}
               name={`dComplexSituation.${index}.col10`}
+              displayText={row.col10}
             />
           </div>
         </div>

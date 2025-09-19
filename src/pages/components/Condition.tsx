@@ -18,19 +18,35 @@ export const Condition = ({ form }: { form: any }) => {
       <div className="grid grid-cols-4 border-black border-t">
         <div className="col-span-1 border-r border-black px-1">Tín dụng</div>
         <div className="col-span-1 border-r border-black px-1 font-bold">
-          <CustomInput form={form} name={`cCondition.0.col2`} />
+          <CustomInput
+            form={form}
+            name={`cCondition.0.col2`}
+            displayText={form.values["cCondition"][0].col2}
+          />
         </div>
         <div className="col-span-2  px-1 font-bold">
-          <CustomInput form={form} name={`cCondition.0.col3`} />
+          <CustomInput
+            form={form}
+            name={`cCondition.0.col3`}
+            displayText={form.values["cCondition"][0].col3}
+          />
         </div>
       </div>
       <div className="grid grid-cols-4 border-black border-t">
         <div className="col-span-1 border-r border-black px-1">Thương mại</div>
         <div className="col-span-1 border-r border-black px-1 font-bold">
-          <CustomInput form={form} name={`cCondition.1.col2`} />
+          <CustomInput
+            form={form}
+            name={`cCondition.1.col2`}
+            displayText={form.values["cCondition"][1].col2}
+          />
         </div>
         <div className="col-span-2 px-1 font-bold">
-          <CustomInput form={form} name={`cCondition.1.col3`} />
+          <CustomInput
+            form={form}
+            name={`cCondition.1.col3`}
+            displayText={form.values["cCondition"][1].col3}
+          />
         </div>
       </div>
     </div>

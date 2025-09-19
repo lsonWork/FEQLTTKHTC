@@ -14,6 +14,8 @@ import ClientCreate from "./pages/ClientCreate.tsx";
 import AccountCreate from "./pages/AccountCreate.tsx";
 import Test from "./pages/test.tsx";
 import TestPdf from "./pages/testPdf.tsx";
+import ClientView from "./pages/ClientView.tsx";
+import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
@@ -33,8 +35,10 @@ createRoot(document.getElementById("root")!).render(
               <Route path="admin/create" element={<AccountCreate />} />
               <Route path="signin" element={<Signin />} />
               <Route path="create" element={<ClientCreate />} />
-              <Route path="test" element={<Test />} />
-              <Route path="test-pdf" element={<TestPdf />} />
+              {/* <Route path="test" element={<Test />} />
+              <Route path="test-pdf" element={<TestPdf />} /> */}
+              <Route path="document/:id" element={<ClientView />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>

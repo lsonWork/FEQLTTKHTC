@@ -1,4 +1,12 @@
-export const CustomInput = ({ form, name }: { form: any; name: string }) => {
+export const CustomInput = ({
+  form,
+  name,
+  displayText,
+}: {
+  form: any;
+  name: string;
+  displayText?: string;
+}) => {
   return (
     <div
       {...form.getInputProps(name)}
@@ -19,7 +27,7 @@ export const CustomInput = ({ form, name }: { form: any; name: string }) => {
       onBlur={(e) => {
         form.setFieldValue(name, e.currentTarget.innerText);
       }}>
-      {form.values[name]}
+      {displayText || form.values[name]}
     </div>
   );
 };
