@@ -143,7 +143,7 @@ export default function AccountManagementPage() {
 
   return (
     <>
-      <div className="w-full py-6">
+      <div className="w-full h-screen py-6">
         <div className="max-w-7xl mx-auto bg-white rounded-lg shadow p-6">
           <h3 className="text-2xl font-bold mb-6">Quản lý tài khoản</h3>
 
@@ -169,7 +169,8 @@ export default function AccountManagementPage() {
               striped
               highlightOnHover
               withTableBorder
-              className="min-w-full">
+              className="min-w-full"
+            >
               <Table.Thead className="bg-gray-50">
                 <Table.Tr>
                   <Table.Th>ID</Table.Th>
@@ -189,7 +190,8 @@ export default function AccountManagementPage() {
                       {" "}
                       <Badge
                         color={item.status ? "green" : "red"}
-                        variant="light">
+                        variant="light"
+                      >
                         {item.status ? "Active" : "Inactive"}
                       </Badge>
                     </Table.Td>
@@ -198,14 +200,16 @@ export default function AccountManagementPage() {
                         <ActionIcon
                           onClick={() => handleEdit(item.id, item.username)}
                           color="blue"
-                          variant="light">
+                          variant="light"
+                        >
                           <IconEdit size={18} />
                         </ActionIcon>
                         {item.status && (
                           <ActionIcon
                             onClick={() => handleDelete(item.id)}
                             color="red"
-                            variant="light">
+                            variant="light"
+                          >
                             <IconLock size={18} />
                           </ActionIcon>
                         )}
@@ -213,7 +217,8 @@ export default function AccountManagementPage() {
                           <ActionIcon
                             onClick={() => handleActive(item.id)}
                             color="green"
-                            variant="light">
+                            variant="light"
+                          >
                             <IconLockOff size={18} />
                           </ActionIcon>
                         )}
@@ -248,7 +253,8 @@ export default function AccountManagementPage() {
         opened={opened}
         onClose={close}
         title="Cập nhật tài khoản"
-        centered>
+        centered
+      >
         <Stack>
           <form className="w-full" onSubmit={form.onSubmit(handleSubmit)}>
             <div className="w-full flex flex-col gap-4">
