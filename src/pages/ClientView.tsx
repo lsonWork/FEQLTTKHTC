@@ -25,7 +25,7 @@ import {
 } from "../api/usePatchDocumentApi";
 
 export default function ClientView() {
-  const { id } = useParams();
+  const { id } = useParams<string>();
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function ClientView() {
     data: documentRawData,
     isSuccess,
     isLoading,
-  } = useGetDocumentByIdApi(Number(id));
+  } = useGetDocumentByIdApi(id || "");
   const dataDocument = documentRawData?.data;
   const form = useForm({
     // Giá trị mặc định
@@ -182,7 +182,7 @@ export default function ClientView() {
 
   const printRef = useRef<HTMLDivElement>(null);
   const [opened, { open, close }] = useDisclosure();
-  const { mutateAsync: patchDocument } = usePatchDocumentApi(Number(id));
+  const { mutateAsync: patchDocument } = usePatchDocumentApi(id || "");
 
   const handleSubmit = () => {
     open();

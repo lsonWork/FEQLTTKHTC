@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "../lib/axios";
 
-export const useGetDocumentByIdApi = (id: number) => {
+export const useGetDocumentByIdApi = (id: string) => {
   return useQuery({
     queryFn: async (): Promise<any> => {
       return await axiosInstance.get(

@@ -5,7 +5,7 @@ export const useDeleteDocumentApi = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id: number) => {
+    mutationFn: async (id: string) => {
       return await axiosInstance.delete(
         `${import.meta.env.VITE_API_URL}/document/${id}`
       );

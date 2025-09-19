@@ -23,7 +23,7 @@ export default function ClientManagementPage() {
   const [activePage, setActivePage] = useState(1);
   const navigate = useNavigate();
   const { data: documentData } = useGetDocumentApi(activePage, debouncedSearch);
-  const [selectedId, setSelectedId] = useState(0);
+  const [selectedId, setSelectedId] = useState("");
 
   const { mutateAsync: deleteDocument } = useDeleteDocumentApi();
 

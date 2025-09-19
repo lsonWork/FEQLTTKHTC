@@ -8,7 +8,7 @@ export type PatchDocumentDTO = {
   accountId: number;
 };
 
-export const usePatchDocumentApi = (id: number) => {
+export const usePatchDocumentApi = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (data: PatchDocumentDTO): Promise<any> => {
