@@ -919,7 +919,7 @@ export default function ClientCreate() {
       >
         <TextInput
           minLength={1}
-          label="Tên tài liệu"
+          label="Tên công ty"
           onChange={(e) => setName(e.currentTarget.value)}
           error={error}
         />

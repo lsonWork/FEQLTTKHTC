@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "../lib/axios";
 
 export type PatchAccountDTO = {
@@ -7,6 +7,7 @@ export type PatchAccountDTO = {
 };
 
 export const usePatchAccountApi = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
       id,
@@ -20,6 +21,9 @@ export const usePatchAccountApi = () => {
         data
       );
       return result.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["account"] });
     },
   });
 };

@@ -40,6 +40,16 @@ axiosInstance.interceptors.response.use(
         }
       }
     }
+    if (
+      error.response?.data.message ===
+      "You are not authorized to delete this document"
+    ) {
+      showNotification({
+        title: "Thất bại",
+        message: "Bạn không có quyền xóa tài liệu này",
+        color: "red",
+      });
+    }
     if (error.response?.status === 400 && error.response?.data?.data) {
       error.response.data.data.map((el: string) => {
         if (el === "cif should not be empty") {

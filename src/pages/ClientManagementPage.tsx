@@ -29,14 +29,14 @@ export default function ClientManagementPage() {
 
   const [opened, { open, close }] = useDisclosure(false);
 
-  const handleDelete = () => {
-    deleteDocument(selectedId);
-    close();
+  const handleDelete = async () => {
+    await deleteDocument(selectedId);
     showNotification({
       title: "Thành công",
       message: "Xóa tài liệu thành công",
       color: "green",
     });
+    close();
   };
 
   return (
@@ -89,8 +89,7 @@ export default function ClientManagementPage() {
                         <ActionIcon
                           onClick={() => navigate(`/document/${item.id}`)}
                           color="green"
-                          variant="light"
-                        >
+                          variant="light">
                           <IconEye size={18} />
                         </ActionIcon>
                       </Tooltip>
@@ -101,8 +100,7 @@ export default function ClientManagementPage() {
                             open();
                           }}
                           color="red"
-                          variant="light"
-                        >
+                          variant="light">
                           <IconTrash size={18} />
                         </ActionIcon>
                       </Tooltip>

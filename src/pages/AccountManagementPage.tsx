@@ -70,7 +70,7 @@ export default function AccountManagementPage() {
       deleteAccount(id);
       showNotification({
         title: "Thành công",
-        message: "Xóa tài khoản thành công",
+        message: "Khoá tài khoản thành công",
         color: "green",
       });
       accountData.data.data = accountData.data.data.filter(
@@ -79,7 +79,7 @@ export default function AccountManagementPage() {
     } catch (error) {
       showNotification({
         title: "Thất bại",
-        message: "Xóa tài khoản thất bại",
+        message: "Khoá tài khoản thất bại",
         color: "red",
       });
     } finally {
