@@ -67,9 +67,8 @@ export default function ClientManagementPage() {
           <Table highlightOnHover withTableBorder className="min-w-full">
             <Table.Thead className="bg-gray-50">
               <Table.Tr>
-                <Table.Th>ID</Table.Th>
+                <Table.Th>Tên công ty</Table.Th>
                 <Table.Th>CIF</Table.Th>
-                <Table.Th>Tên tài liệu</Table.Th>
                 <Table.Th>Tạo bởi</Table.Th>
                 <Table.Th>Ngày cập nhật gần nhất</Table.Th>
                 <Table.Th className="text-center">Action</Table.Th>
@@ -78,9 +77,8 @@ export default function ClientManagementPage() {
             <Table.Tbody>
               {documentData?.data.data.map((item: any) => (
                 <Table.Tr key={item.id}>
-                  <Table.Td>{item.id}</Table.Td>
-                  <Table.Td>{item.cif}</Table.Td>
                   <Table.Td>{item.name}</Table.Td>
+                  <Table.Td>{item.cif}</Table.Td>
                   <Table.Td>{item.account.username}</Table.Td>
                   <Table.Td>
                     {dayjs(item.createdAt).format("DD/MM/YYYY HH:mm:ss")}
