@@ -172,23 +172,18 @@ export default function ClientCreate() {
   });
 
   const printRef = useRef<HTMLDivElement>(null);
-  const [opened, { open, close }] = useDisclosure();
   const { mutateAsync: postDocument } = usePostDocumentApi();
 
-  const handleSubmit = () => {
-    open();
-  };
-
   const handleSave = async () => {
-    setError(null);
-    if (name.trim().length === 0) {
-      setError("Tên tài liệu không được để trống");
-      return;
-    }
+    // setError(null);
+    // if (name.trim().length === 0) {
+    //   setError("Tên tài liệu không được để trống");
+    //   return;
+    // }
 
     // postDocument
     const newDocument = {
-      name,
+      name: form.values.bClientName,
       content: JSON.stringify(form.values),
       cif: form.values.bCIF.trim(),
       accountId: JSON.parse(localStorage.getItem("user") || "{}").id,
@@ -214,19 +209,17 @@ export default function ClientCreate() {
     <div className="container mx-auto">
       <div
         onClick={() => navigate("/")}
-        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4"
-      >
+        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4">
         <IconArrowLeft />
         <span>Về trang quản lý</span>
       </div>
       <div className="w-full">
         <div className="w-full h-auto relative bg-white/90 shadow-[0_0_20px_rgba(0,0,0,0.2)] p-8">
-          <form onSubmit={form.onSubmit(handleSubmit)}>
+          <form onSubmit={form.onSubmit(handleSave)}>
             <div className="no-print flex justify-end absolute right-[2%] top-0">
               <button
                 className="mt-8 no-print bg-green-700 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
-                type="submit"
-              >
+                type="submit">
                 <div className="flex items-center gap-1">
                   <span>Lưu thông tin</span>
                   <IconFile />
@@ -236,8 +229,7 @@ export default function ClientCreate() {
             <div
               ref={printRef}
               id="print-area"
-              style={{ fontFamily: "Times New Roman, Times, serif" }}
-            >
+              style={{ fontFamily: "Times New Roman, Times, serif" }}>
               <div className="flex items-end gap-2">
                 <div className="text-[12pt] shrink-0">Mã khách hàng:</div>
                 <CustomInput form={form} name="aCode" />
@@ -256,16 +248,14 @@ export default function ClientCreate() {
                       borderCollapse: "collapse",
                       tableLayout: "fixed",
                       width: "100%",
-                    }}
-                  >
+                    }}>
                     <tbody>
                       <tr>
                         <td
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}
-                        >
+                          }}>
                           Đơn vị quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -288,8 +278,7 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}
-                        >
+                          }}>
                           Phòng KH quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -411,8 +400,7 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}
-                        >
+                          }}>
                           Phân loại KH khả năng thu nợ
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -906,7 +894,7 @@ export default function ClientCreate() {
           </form>
         </div>
       </div>
-      <Modal
+      {/* <Modal
         opened={opened}
         onClose={() => {
           setName("");
@@ -915,8 +903,7 @@ export default function ClientCreate() {
         }}
         withCloseButton={true}
         centered
-        title="Thông tin tài liệu"
-      >
+        title="Thông tin tài liệu">
         <TextInput
           minLength={1}
           label="Tên công ty"
@@ -925,13 +912,12 @@ export default function ClientCreate() {
         />
         <Button
           onClick={handleSave}
-          className="mt-2 no-print bg-green-700 hover:bg-green-600 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-200 transition-all"
-        >
+          className="mt-2 no-print bg-green-700 hover:bg-green-600 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-200 transition-all">
           <div className="flex items-center gap-1">
             <span>Lưu</span>
           </div>
         </Button>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

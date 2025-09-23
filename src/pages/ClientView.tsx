@@ -184,18 +184,14 @@ export default function ClientView() {
   const [opened, { open, close }] = useDisclosure();
   const { mutateAsync: patchDocument } = usePatchDocumentApi(id || "");
 
-  const handleSubmit = () => {
-    open();
-  };
-
   const handleSave = async () => {
-    setError(null);
-    if (name.trim().length === 0) {
-      setError("Tên tài liệu không được để trống");
-      return;
-    }
+    // setError(null);
+    // if (name.trim().length === 0) {
+    //   setError("Tên tài liệu không được để trống");
+    //   return;
+    // }
     const newDocument = {
-      name,
+      name: form.values.bClientName,
       content: JSON.stringify(form.values),
       cif: form.values.bCIF,
       accountId: JSON.parse(localStorage.getItem("user") || "{}").id,
@@ -227,7 +223,7 @@ export default function ClientView() {
       </div>
       <div className="w-full">
         <div className="w-full h-auto relative bg-white/90 shadow-[0_0_20px_rgba(0,0,0,0.2)] p-8">
-          <form onSubmit={form.onSubmit(handleSubmit)}>
+          <form onSubmit={form.onSubmit(handleSave)}>
             <div className="no-print flex justify-end absolute right-[2%] gap-2 top-0">
               <button
                 className="mt-8 no-print border-green-700 text-green-700 py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
@@ -915,7 +911,7 @@ export default function ClientView() {
           </form>
         </div>
       </div>
-      <Modal
+      {/* <Modal
         opened={opened}
         onClose={() => {
           setError(null);
@@ -938,7 +934,7 @@ export default function ClientView() {
             <span>Lưu</span>
           </div>
         </Button>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
