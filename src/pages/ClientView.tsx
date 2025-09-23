@@ -1,7 +1,6 @@
-import { Button, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconArrowLeft, IconFile, IconPrinter } from "@tabler/icons-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { CustomInput } from "./components/CustomInput";
 import CapitalStructure from "./components/CapitalStructure";
@@ -15,7 +14,6 @@ import { Approve } from "./components/Approve";
 import { UpComing } from "./components/UpComing";
 import { CurrentPrice } from "./components/CurrentPrice";
 import { ComplexSituation } from "./components/ComplexSituation";
-import { useDisclosure } from "@mantine/hooks";
 import { loaderStore } from "../store/loader-store";
 import { showNotification } from "@mantine/notifications";
 import { useGetDocumentByIdApi } from "../api/useGetDocumentByIdApi";
@@ -26,8 +24,6 @@ import {
 
 export default function ClientView() {
   const { id } = useParams<string>();
-  const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const {
     data: documentRawData,
@@ -176,12 +172,10 @@ export default function ClientView() {
     }
     if (isSuccess) {
       form.setValues(JSON.parse(dataDocument?.content || "{}"));
-      setName(dataDocument?.name || "");
     }
   }, [isSuccess, isLoading]);
 
   const printRef = useRef<HTMLDivElement>(null);
-  const [opened, { open, close }] = useDisclosure();
   const { mutateAsync: patchDocument } = usePatchDocumentApi(id || "");
 
   const handleSave = async () => {
@@ -205,7 +199,7 @@ export default function ClientView() {
         message: "Cập nhật tài liệu thành công",
         color: "green",
       });
-      close();
+      navigate("/");
     } catch (error) {
       return error;
     } finally {
@@ -217,7 +211,8 @@ export default function ClientView() {
     <div className="container mx-auto">
       <div
         onClick={() => navigate("/")}
-        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4">
+        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4"
+      >
         <IconArrowLeft />
         <span>Về trang quản lý</span>
       </div>
@@ -228,7 +223,8 @@ export default function ClientView() {
               <button
                 className="mt-8 no-print border-green-700 text-green-700 py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
                 type="button"
-                onClick={() => window.print()}>
+                onClick={() => window.print()}
+              >
                 <div className="flex items-center gap-1">
                   <span>In/tải xuống</span>
                   <IconPrinter />
@@ -236,7 +232,8 @@ export default function ClientView() {
               </button>
               <button
                 className="mt-8 no-print bg-green-700 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
-                type="submit">
+                type="submit"
+              >
                 <div className="flex items-center gap-1">
                   <span>Lưu thông tin</span>
                   <IconFile />
@@ -246,7 +243,8 @@ export default function ClientView() {
             <div
               ref={printRef}
               id="print-area"
-              style={{ fontFamily: "Times New Roman, Times, serif" }}>
+              style={{ fontFamily: "Times New Roman, Times, serif" }}
+            >
               <div className="flex items-end gap-2">
                 <div className="text-[12pt] shrink-0">Mã khách hàng:</div>
                 <CustomInput form={form} name="aCode" />
@@ -265,14 +263,16 @@ export default function ClientView() {
                       borderCollapse: "collapse",
                       tableLayout: "fixed",
                       width: "100%",
-                    }}>
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <td
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Đơn vị quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -295,7 +295,8 @@ export default function ClientView() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phòng KH quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -417,7 +418,8 @@ export default function ClientView() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phân loại KH khả năng thu nợ
                         </td>
                         <td style={{ border: "1px solid black" }}>

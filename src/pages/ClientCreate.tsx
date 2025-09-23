@@ -1,7 +1,6 @@
-import { Button, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { IconArrowLeft, IconFile } from "@tabler/icons-react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { CustomInput } from "./components/CustomInput";
 import CapitalStructure from "./components/CapitalStructure";
@@ -19,13 +18,10 @@ import {
   usePostDocumentApi,
   type CreateDocumentDTO,
 } from "../api/usePostDocumentApi";
-import { useDisclosure } from "@mantine/hooks";
 import { loaderStore } from "../store/loader-store";
 import { showNotification } from "@mantine/notifications";
 
 export default function ClientCreate() {
-  const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const form = useForm({
     // Giá trị mặc định
@@ -175,13 +171,6 @@ export default function ClientCreate() {
   const { mutateAsync: postDocument } = usePostDocumentApi();
 
   const handleSave = async () => {
-    // setError(null);
-    // if (name.trim().length === 0) {
-    //   setError("Tên tài liệu không được để trống");
-    //   return;
-    // }
-
-    // postDocument
     const newDocument = {
       name: form.values.bClientName,
       content: JSON.stringify(form.values),
@@ -209,7 +198,8 @@ export default function ClientCreate() {
     <div className="container mx-auto">
       <div
         onClick={() => navigate("/")}
-        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4">
+        className="no-print inline-flex items-center gap-2 cursor-pointer hover:scale-[1.01] duration-300 transition-all p-4"
+      >
         <IconArrowLeft />
         <span>Về trang quản lý</span>
       </div>
@@ -219,7 +209,8 @@ export default function ClientCreate() {
             <div className="no-print flex justify-end absolute right-[2%] top-0">
               <button
                 className="mt-8 no-print bg-green-700 text-white py-2 px-6 rounded-xl cursor-pointer hover:opacity-80 hover:scale-[1.01] duration-300 transition-all"
-                type="submit">
+                type="submit"
+              >
                 <div className="flex items-center gap-1">
                   <span>Lưu thông tin</span>
                   <IconFile />
@@ -229,7 +220,8 @@ export default function ClientCreate() {
             <div
               ref={printRef}
               id="print-area"
-              style={{ fontFamily: "Times New Roman, Times, serif" }}>
+              style={{ fontFamily: "Times New Roman, Times, serif" }}
+            >
               <div className="flex items-end gap-2">
                 <div className="text-[12pt] shrink-0">Mã khách hàng:</div>
                 <CustomInput form={form} name="aCode" />
@@ -248,14 +240,16 @@ export default function ClientCreate() {
                       borderCollapse: "collapse",
                       tableLayout: "fixed",
                       width: "100%",
-                    }}>
+                    }}
+                  >
                     <tbody>
                       <tr>
                         <td
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Đơn vị quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -278,7 +272,8 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phòng KH quản lý
                         </td>
                         <td style={{ border: "1px solid black" }}>
@@ -400,7 +395,8 @@ export default function ClientCreate() {
                           style={{
                             border: "1px solid black",
                             fontWeight: "bold",
-                          }}>
+                          }}
+                        >
                           Phân loại KH khả năng thu nợ
                         </td>
                         <td style={{ border: "1px solid black" }}>
