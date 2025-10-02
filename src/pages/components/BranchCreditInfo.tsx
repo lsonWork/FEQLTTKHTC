@@ -1,23 +1,23 @@
 import { CustomInput } from "./CustomInput";
 
 export default function BranchCreditInfo({ form }: { form: any }) {
-  const addRow = () => {
-    form.insertListItem("cTinhHinhTinDungTaiChiNhanh", {
-      id: Date.now().toString(),
-      col1: "",
-      col2: "",
-      col3: "",
-      col4: "",
-      col5: "",
-    });
-  };
+  // const addRow = () => {
+  //   form.insertListItem("cTinhHinhTinDungTaiChiNhanh", {
+  //     id: Date.now().toString(),
+  //     col1: "",
+  //     col2: "",
+  //     col3: "",
+  //     col4: "",
+  //     col5: "",
+  //   });
+  // };
 
-  const removeRow = (index: number) => {
-    form.removeListItem("cTinhHinhTinDungTaiChiNhanh", index);
-  };
+  // const removeRow = (index: number) => {
+  //   form.removeListItem("cTinhHinhTinDungTaiChiNhanh", index);
+  // };
   return (
     <div className="border border-black">
-      <div onDoubleClick={addRow} className="grid grid-cols-12 font-bold">
+      <div className="grid grid-cols-12 font-bold">
         <div className="col-span-1 border-r border-black text-center">
           {/* <CustomInput form={form} name="cTinhHinhTinDungTaiChiNhanhFirst" /> */}
           TT
@@ -41,13 +41,7 @@ export default function BranchCreditInfo({ form }: { form: any }) {
       </div>
       {form.values.cTinhHinhTinDungTaiChiNhanh.map(
         (row: any, index: number) => (
-          <div
-            key={row.id}
-            onContextMenu={(e) => {
-              e.preventDefault();
-              removeRow(index);
-            }}
-            className="grid grid-cols-12 border-black border-t">
+          <div key={row.id} className="grid grid-cols-12 border-black border-t">
             <div className="col-span-1 border-r border-black px-1 text-center">
               <CustomInput
                 form={form}
