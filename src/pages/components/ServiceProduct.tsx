@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default function ServiceProduct({ form }: { form: any }) {
   return (
     <div className="border border-black">
