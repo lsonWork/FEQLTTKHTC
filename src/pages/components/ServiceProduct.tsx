@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default function ServiceProduct({ form }: { form: any }) {
   return (
     <div className="border border-black">
@@ -12,7 +11,7 @@ export default function ServiceProduct({ form }: { form: any }) {
         </div>
         <div className="col-span-1 border-black text-center">Chưa sử dụng</div>
       </div>
-      {form.values.dServiceProduct.map((row, index) => (
+      {form.values.dServiceProduct.map((row: any, index: number) => (
         <div className="grid grid-cols-9 border-black border-t">
           <div className="col-span-1 border-r border-black px-1 text-center">
             {index + 1}
