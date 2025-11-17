@@ -21,6 +21,7 @@ import {
   usePatchDocumentApi,
   type PatchDocumentDTO,
 } from "../api/usePatchDocumentApi";
+import ServiceProduct from "./components/ServiceProduct";
 
 export default function ClientView() {
   const { id } = useParams<string>();
@@ -44,7 +45,7 @@ export default function ClientView() {
       aClientGroup: "",
       aDebtAbility: "",
       aWarning1: "",
-      aWarning2: "",
+      // aWarning2: "",
       aWarning3: "",
       bClientName: "",
       bCIF: "",
@@ -274,6 +275,44 @@ export default function ClientView() {
       cDirectorApprove: [
         { col2: "", col3: "" },
         { col2: "", col3: "" },
+      ],
+      dServiceProduct: [
+        {
+          col1: "1",
+          col2: "Tín dụng",
+          col3: false,
+          col4: false,
+        },
+        {
+          col1: "2",
+          col2: "Huy động vốn",
+          col3: false,
+          col4: false,
+        },
+        {
+          col1: "3",
+          col2: "MBNT-TTTM",
+          col3: false,
+          col4: false,
+        },
+        {
+          col1: "4",
+          col2: "Bảo lãnh",
+          col3: false,
+          col4: false,
+        },
+        {
+          col1: "5",
+          col2: "Thẻ tín dụng",
+          col3: false,
+          col4: false,
+        },
+        {
+          col1: "6",
+          col2: "Bán lẻ (trả lương, bảo hiểm FWD, bảo hiểm phi nhân thọ,…)",
+          col3: false,
+          col4: false,
+        },
       ],
       dUpComing: [] as {
         col1: string;
@@ -785,21 +824,13 @@ export default function ClientView() {
                             }}
                           />
                         </td>
-                        <td style={{ border: "1px solid black" }}>
-                          <input
-                            {...form.getInputProps("aWarning2")}
-                            style={{
-                              textAlign: "center",
-                              border: "none",
-                              width: "100%",
-                              padding: 0,
-                              margin: 0,
-                              fontSize: "12pt",
-                              lineHeight: "1",
-                              height: "auto",
-                              outline: "none",
-                            }}
-                          />
+                        <td
+                          style={{
+                            border: "1px solid black",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Ngày cập nhật
                         </td>
                         <td style={{ border: "1px solid black" }}>
                           <input
@@ -1204,8 +1235,11 @@ export default function ClientView() {
                   <h2 className="text-[13pt] font-bold my-4">
                     2. Các sản phẩm đang sử dụng khác (bao gồm cả bán chéo)
                   </h2>
+                  <div>
+                    <ServiceProduct form={form} />
+                  </div>
                 </div>
-                <div className="">
+                <div className="my-4">
                   <span className="text-[13pt] font-bold mr-1">
                     3. Công việc triển khai trong thời gian tới
                   </span>
