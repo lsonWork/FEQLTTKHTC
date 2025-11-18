@@ -310,6 +310,12 @@ export default function ClientCreate() {
           col3: false,
           col4: false,
         },
+        {
+          col1: "",
+          col2: "",
+          col3: false,
+          col4: false,
+        },
       ],
       dUpComing: [] as {
         col1: string;
